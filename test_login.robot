@@ -20,11 +20,10 @@ Login-getCode
     wait until element is enabled    xpath://*[@id="app"]/div/div[1]/div/span
     Click Element    xpath://*[@id="app"]/div/div[1]/div/span
     sleep    2
-    input text    name=username    13734206025
-    input text    name=password    asdqwe123
     FOR   ${index}  IN RANGE  10
+        input text    name=username    13734206025
+        input text    name=password    asdqwe123
          #    设置截图路径
-#        RUN KEYWORD IF    '${loginSuccessTitle}'=='http://sso.wt.com:3100/loginPage?error'    Exit for loop
         set screenshot directory        ${CURDIR}/picture
          #    截图并保存
         capture_page_screenshot         ${CURDIR}/picture/1.png
@@ -32,11 +31,11 @@ Login-getCode
         input text    name=imgCode    ${code}
         click button    id=login
         sleep   2
-        ${loginSuccessTitle}      get text       //*[@id="app"]/div/div[2]/div/div/div[1]/span
-        RUN KEYWORD IF    '${loginSuccessTitle}'=='岗位选择'    Exit for loop
-             ELSE IF    ${loginErrorText}==验证码错误  Continue for loop
-        #${errorText}        get text      //*[@id="span_msg"]
-        log   登录成功退出
+        ${currentUrl}       get locations
+        log   ${currentUrl}
+        # 判断地址为error 则继续循环，地址为其他，退出循环
+        ${result}       ${resultvalue}     run keyword and ignore error     set variable if    '${currentUrl}[0]'=='http://sso.wt.com:3100/loginPage?error'    登录失败    ${currentUrl}   登录成功
+        Exit For Loop If   '${resultvalue}'=='登录成功'
     END
     sleep   5
     click Element    xpath://*[@id="app"]/div/div[2]/div/div/div[2]/div[2]/div[3]/table/tbody/tr/td[2]/div
@@ -48,7 +47,8 @@ Login-getCode
     page_should_contain    大同招生政府
     click Element    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[2]/span/span/li/div
     sleep   2
-    click element   xpath://*[@id="el-popover-534"]/a/li/div
+    drag_and_drop_by_offset    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[2]/span/span/li/i    0    20
+#    click element   xpath://*[@id="el-popover-534"]/a/li/div
     page_should_contain    当前位置：平城区
     close browser
 #    Should Contain    name=wd    robotframework
