@@ -32,9 +32,7 @@ Login-getCode
         click button    id=login
         sleep   2
         ${currentUrl}       get locations
-        log   ${currentUrl}
         ${title}       get window titles
-        log   ${title}
         # 判断地址为error，则为登录失败，退出条件为登录成功，不符合条件继续循环，地址为其他，则为登录成功，符合退出条件
         ${result}       ${resultvalue}     run keyword and ignore error     set variable if    '${currentUrl}[0]'=='http://sso.wt.com:3100/loginPage?error'    登录失败    ${currentUrl}   登录成功
         Exit For Loop If   '${resultvalue}'=='登录成功'
@@ -67,51 +65,3 @@ Login-getCode
     Run Keyword And Continue On Failure    page_should_contain    当前位置：平城区
     close browser
 #    Should Contain    name=wd    robotframework
-
-
-baidu_search
-    open browser    http://www.baidu.com    chrome
-    maximize_browser_window
-    input text    id:kw    robotframework
-    click button    id:su
-    sleep    5
-    set screenshot directory        ${CURDIR}/picture
-    capture_page_screenshot         ${CURDIR}/picture/1.png
-    ${code}    getCode     ${CURDIR}\\picture\\
-    log     ${code}
-    open context menu   //*[@id="2"]/div/div[1]/a/span
-    send    down
-    send    down
-    send    down
-    send    down
-    send    enter
-#    send    ${CURDIR}/picture
-    sleep    3
-    send    enter
-#    close browser
-
-
-Login-checkCode
-    open browser    http://sqwytst.wt.com:14352/   chrome
-    maximize_browser_window
-    wait until element is enabled    xpath://*[@id="app"]/div/div[1]/div/span
-    Click Element    xpath://*[@id="app"]/div/div[1]/div/span
-    sleep    2
-    input text    name=username    18730001028
-    input text    name=password    123456
-    open context menu    xpath://*[@id="codeImage"]
-    send    down
-    send    down
-    send    enter
-    sleep    3
-    send    enter
-    sleep    3
-    ${code}    checkCode     ${CURDIR}\\picture\\
-    input text    name=imgCode    ${code}
-    click button    id=login
-#    close browser
-#    Should Contain    name=wd    robotframework
-
-
-*** Comments ***
-注释
