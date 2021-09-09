@@ -41,27 +41,47 @@ Login-getCode
     click Element    xpath://*[@id="app"]/div/div[2]/div/div/div[2]/div[2]/div[3]/table/tbody/tr/td[2]/div
     click Element    xpath:/html/body/div[1]/div/div[2]/div/div/div[3]/div/button[2]/span
     sleep   5
-    # 申请管理 --输入申请人
+    # 申请管理
+    # 输入申请人
     click Element    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[3]/a/li/div
     input text       xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[1]/div/div/input     大同招生政府
-    # 申请管理 --选择机构名称
-    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[4]/div/div/div/input
+    # 选择机构名称
+    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[4]/div/div/div/input  # 点击下拉框
     sleep   3
-    click element    xpath:/html/body/div[2]/div/div[1]/div/ul/li/span
+    click element    xpath:/html/body/div[2]/div/div[1]/div/ul/li/span  # 点击平城区
     sleep   3
-    click element    xpath:/html/body/div[2]/div/div[2]/div/ul/li[1]/span
+    click element    xpath:/html/body/div[2]/div/div[2]/div/ul/li[1]/span   # 点击街道
     sleep   3
-    click element    xpath:/html/body/div[2]/div/div[3]/div/ul/li[1]/span
+    click element    xpath:/html/body/div[2]/div/div[3]/div/ul/li[1]/span   # 点击社区
     sleep   3
-    click element    xpath:/html/body/div[2]/div/div[4]/div/ul/li[1]/label/span[1]/span
+    click element    xpath:/html/body/div[2]/div/div[4]/div/ul/li[1]/label/span[1]/span   #选择网格
     sleep   3
-    # 申请管理 --点击查询按钮并检查返回值
-    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[6]/div/button[1]/span
+    # 选择审核状态
+    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[3]/div/div/div/input
+    sleep   3
+    click element    xpath:/html/body/div[3]/div[1]/div[1]/ul/li[2]
+    # 选择是否兼职
+    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[5]/div/div/div/input
+    sleep   3
+    click element    xpath:/html/body/div[4]/div[1]/div[1]/ul/li[2]/span
+    # 点击查询按钮并检查返回值
+    click element    xpath://*[@id="appMain"]/div/div[1]/div/main/div/div[1]/div/form/div[6]/div/button[1]/span     # 点击查询按钮
     Run Keyword And Continue On Failure    page_should_contain    大同招生政府
     # 网格管理模块
     click Element    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[2]/span/span/li/div
-#    drag_and_drop_by_offset    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[2]/span/span/li/i    -5    10
-#    click element   xpath://*[@id="el-popover-534"]/a/li/div
+    sleep   5
+    click Element    xpath:/html/body/div[5]/a/li/div
     Run Keyword And Continue On Failure    page_should_contain    当前位置：平城区
-    close browser
+    # 通知公告
+    click element    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[4]/a/li/div
+    sleep   5
+    input text       xpath://*[@id="appMain"]/div/div[1]/div[2]/div/form/div[1]/div/div/input     测试
+    click element    xpath://*[@id="appMain"]/div/div[1]/div[2]/div/form/div[2]/div/button[1]/span
+    click element    xpath://*[@id="appMain"]/div/div[1]/div[1]/button/span
+    sleep   5
+    input text       xpath://*[@id="appMain"]/div/div[2]/div/div/div[2]/form/div[1]/div/div[1]/input    测试
+    input text       xpath:/html/body/p/text()            测试
+    click element    xpath://*[@id="appMain"]/div/div[2]/div/div/div[3]/div/button[2]
+    Run Keyword And Continue On Failure    page_should_contain    当前位置：平城区
+#    close browser
 #    Should Contain    name=wd    robotframework
