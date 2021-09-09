@@ -75,13 +75,15 @@ Login-getCode
     # 通知公告
     click element    xpath://*[@id="app"]/div/div[1]/div/div[1]/div/ul/div[4]/a/li/div
     sleep   5
+    # 查询
     input text       xpath://*[@id="appMain"]/div/div[1]/div[2]/div/form/div[1]/div/div/input     测试
     click element    xpath://*[@id="appMain"]/div/div[1]/div[2]/div/form/div[2]/div/button[1]/span
+    # 添加
     click element    xpath://*[@id="appMain"]/div/div[1]/div[1]/button/span
     sleep   5
     input text       xpath://*[@id="appMain"]/div/div[2]/div/div/div[2]/form/div[1]/div/div[1]/input    测试
-    input text       xpath:/html/body/p/text()            测试
+    input text       xpath:/html/body/div[1]/div/div[2]/section/div/div[2]/div/div/div[2]/form/div[2]/div/div/div/div/div[2]/iframe            测试
     click element    xpath://*[@id="appMain"]/div/div[2]/div/div/div[3]/div/button[2]
-    Run Keyword And Continue On Failure    page_should_contain    当前位置：平城区
+    #
 #    close browser
 #    Should Contain    name=wd    robotframework
